@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajowàà - Reinventing Ajo for the Digital Age</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #2d5a2d;
+            --accent-color: #4a8c4a;
+            --light-green: #f0f8f0;
+            --text-light: #666;
+            --white: #e7e9dc;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--primary-color);
+            background-color: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .cta-btn {
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .cta-btn:hover {
+            background: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(45, 90, 45, 0.3);
+        }
+
+        .cta-btn.large {
+            padding: 16px 32px;
+            font-size: 1.1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--gray-100);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .about-highlight {
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .about-highlight h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Problems & Solutions */
+        .problems-solutions {
+            background: var(--white);
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .problems, .solutions {
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .problems {
+            background: #fff5f5;
+            border-left: 4px solid #e53e3e;
+        }
+
+        .solutions {
+            background: var(--light-green);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .problems h3, .solutions h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .problems ul, .solutions ul {
+            list-style: none;
+        }
+
+        .problems li, .solutions li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .problems li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #e53e3e;
+            font-weight: bold;
+        }
+
+        .solutions li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Features Grid */
+        .features {
+            background: var(--gray-100);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background: var(--white);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--secondary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .step h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .step p {
+            color: var(--text-light);
+        }
+
+        /* Why Choose Us */
+        .why-choose {
+            background: var(--light-green);
+        }
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .benefit-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.2rem;
+            color: var(--white);
+        }
+
+        /* Vision Quote */
+        .vision {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .vision blockquote {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background: var(--secondary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .final-cta h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn.white {
+            background: var(--white);
+            color: var(--secondary-color);
+        }
+
+        .cta-btn.white:hover {
+            background: var(--gray-200);
+            transform: translateY(-2px);
+        }
+
+        /* Sticky Button */
+        .sticky-cta {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        .sticky-cta .cta-btn {
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-weight: bold;
+            box-shadow: 0 4px 20px rgba(45, 90, 45, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .nav-container {
+                padding: 1rem 15px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .sticky-cta {
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 100px 0 60px;
+            }
+
+            .section-title {
+                margin-bottom: 2rem;
+            }
+
+            .feature-card, .benefit {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* Scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Ajowàà</div>
+            <a href="https://forms.google.com/your-form-link" class="cta-btn" target="_blank">Join Waitlist</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Reinventing Ajo for the Digital Age</h1>
+                <p>Save, grow, and achieve your goals with Ajowàà — the modern way to do rotational and personal savings.</p>
+                <a href="https://forms.google.com/your-form-link" class="cta-btn large" target="_blank">Join the Waitlist</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about section">
+        <div class="container">
+            <h2 class="section-title">About Ajowàà</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Ajowàà is a digital platform transforming Africa's traditional "ajo" savings culture into a secure, transparent, and rewarding financial system. We're building the future of savings by combining the trust and community spirit of traditional ajo with cutting-edge technology.</p>
+                    <p>Our platform makes savings accessible, secure, and profitable for everyone — from students and workers to traders and the diaspora community.</p>
+                </div>
+                <div class="about-highlight">
+                    <h3>Tradition Meets Technology</h3>
+                    <p>Preserving the cultural essence of ajo while delivering modern financial solutions for today's digital world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problems & Solutions -->
+    <section class="problems-solutions section">
+        <div class="container">
+            <h2 class="section-title">Why Ajowàà Will Be the Biggest & Best</h2>
+            <div class="comparison">
+                <div class="problems">
+                    <h3>Problems with Local Ajo</h3>
+                    <ul>
+                        <li>Lack of trust (collectors disappearing with money)</li>
+                        <li>No security (cash handling risks)</li>
+                        <li>No record keeping</li>
+                        <li>No rewards or interest</li>
+                        <li>Limited to local groups only</li>
+                    </ul>
+                </div>
+                <div class="solutions">
+                    <h3>Ajowàà's Solutions</h3>
+                    <ul>
+                        <li>Secure & automated digital savings</li>
+                        <li>Transparent contribution tracking</li>
+                        <li>Rewards, bonuses, and investments</li>
+                        <li>Accessible anywhere in Nigeria & diaspora</li>
+                        <li>Professional financial management</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Features -->
+    <section class="features section">
+        <div class="container">
+            <h2 class="section-title">Core Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Digitized Rotational Savings</h3>
+                    <p>Secure, automated ajo groups with transparent contribution tracking and guaranteed payouts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Personal Savings</h3>
+                    <p>Flexible savings plans tailored to your goals and financial capacity.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Group Target Savings</h3>
+                    <p>Save together with friends, family, or colleagues towards common goals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏪</div>
+                    <h3>Merchant Savings Groups</h3>
+                    <p>Tailored group savings solutions for traders and business communities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>SafeLock</h3>
+                    <p>Lock funds for fixed time periods and earn higher returns on your savings.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3>Flex Savings Wallet</h3>
+                    <p>Save and withdraw anytime with easy access to your funds when needed.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Target Plans</h3>
+                    <p>Save for rent, school fees, travel, or any specific projects and goals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Investment Opportunities</h3>
+                    <p>Access curated low-risk investments to grow your wealth beyond traditional savings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works section">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Sign Up for Waitlist</h3>
+                    <p>Join thousands of early adopters waiting to experience the future of digital savings.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Choose Your Savings Plan</h3>
+                    <p>Select from our variety of savings options that best fit your financial goals and lifestyle.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Save, Track, and Grow</h3>
+                    <p>Start saving and watch your money grow with our secure, automated platform — anytime, anywhere.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-choose section">
+        <div class="container">
+            <h2 class="section-title">Why Choose Us?</h2>
+            <div class="benefits">
+                <div class="benefit">
+                    <div class="benefit-icon">🛡️</div>
+                    <h3>Secure & Transparent</h3>
+                    <p>Bank-level security with full transparency in all transactions and savings activities.</p>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">🌍</div>
+                    <h3>Built for Everyone</h3>
+                    <p>Designed for students, workers, traders, and diaspora communities across Nigeria and beyond.</p>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">🏛️</div>
+                    <h3>Rooted in Culture</h3>
+                    <p>Built on Africa's trusted savings culture, enhanced with modern technology and security.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Quote -->
+    <section class="vision">
+        <div class="container">
+            <blockquote>
+                "Ajowàà is building Africa's biggest digital savings community — where tradition meets technology."
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Be Part of the Future of Savings</h2>
+            <p>Join thousands already waiting to experience Ajowàà. Sign up now and be among the first to access our powerful savings platform.</p>
+            <a href="https://forms.google.com/your-form-link" class="cta-btn white large" target="_blank">Join the Waitlist Now</a>
+        </div>
+    </section>
+
+    <!-- Sticky CTA Button -->
+    <div class="sticky-cta">
+        <a href="https://forms.google.com/your-form-link" class="cta-btn" target="_blank">Join Waitlist</a>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe feature cards and benefit cards for animation
+        document.querySelectorAll('.feature-card, .benefit, .step').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Hide/show sticky button based on scroll position
+        window.addEventListener('scroll', () => {
+            const stickyBtn = document.querySelector('.sticky-cta');
+            const heroSection = document.querySelector('.hero');
+            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+            
+            if (window.scrollY > heroBottom) {
+                stickyBtn.style.opacity = '1';
+                stickyBtn.style.transform = 'scale(1)';
+            } else {
+                stickyBtn.style.opacity = '0';
+                stickyBtn.style.transform = 'scale(0.8)';
+            }
+        });
+
+        // Initialize sticky button styles
+        document.querySelector('.sticky-cta').style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        document.querySelector('.sticky-cta').style.opacity = '0';
+        document.querySelector('.sticky-cta').style.transform = 'scale(0.8)';
+    </script>
+</body>
+</html>
